@@ -1,5 +1,8 @@
 package ru.mentor.lessons;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -176,5 +179,133 @@ public class App {
             }
         }
     }
+
+    //    ============task2.01===============
+//1) Прочитайте из консоли Scanner’ом строку, определите кол-во символов в строке,
+//    выведите на экран кол-во символов.
+//    И добавьте в строку слово “java” и выведете её на экран.
+
+    public static class Task11 {
+        public static void readStringToConsole() {
+            Scanner sc = new Scanner(System.in);
+            String line = sc.nextLine();
+            System.out.println("Number of characters: " + countStringLength(line));
+            System.out.println(line + "java");
+        }
+
+        private static int countStringLength(String str) {
+            return str.length();
+        }
+
+        public static void main(String[] args) {
+            readStringToConsole();
+        }
+    }
+
+    //    ============task2.02===============
+//    2) Создай-те класс Human в котором опишите основные свойства человека.
+//    А так же реализуйте метод sayHello у человека, который выводит “Привет” на экран.
+//    Создайте 10 экземпляров человека, добавьте их в массив. И с помощью цикла у каждого
+//    экземпляра человека вызовите метод sayHello
+//    @
+
+    public static class Task12 {
+        public static class Human {
+            private String name;
+            private int age;
+            private Sex sex;
+
+            public Human(String name, int age, Sex sex) {
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+            }
+
+            public void sayHello() {
+                System.out.println("Привет");
+            }
+        }
+
+        public enum Sex {
+            MALE, FEMALE
+        }
+
+        public static void main(String[] args) {
+            Human[] humans = {
+                    new Human("Fedor", 21, Sex.MALE),
+                    new Human("Svetlana", 22, Sex.FEMALE),
+                    new Human("Stepan", 21, Sex.MALE),
+                    new Human("Rita", 22, Sex.FEMALE),
+                    new Human("Ivan", 21, Sex.MALE),
+                    new Human("Irina", 22, Sex.FEMALE),
+                    new Human("Fedor", 21, Sex.MALE),
+                    new Human("Svetlana", 22, Sex.FEMALE),
+                    new Human("Max", 21, Sex.MALE),
+                    new Human("Elena", 22, Sex.FEMALE)
+            };
+            for (Human human : humans) {
+                human.sayHello();
+            }
+        }
+    }
+    //    ============task2.03===============
+    //3) Прочитайте из консоли BuffereReader’ом массив чисел переданных через запятую в одну строку.
+    // Из этого массива выведете только чётный.
+
+    public static class Task13 {
+        public static void start() throws IOException {
+            int[] integers = convertStringToInt(parseString(readFromConsole()));
+            printEvenNumber(integers);
+        }
+
+        private static String readFromConsole() throws IOException {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            return br.readLine();
+        }
+
+        private static String[] parseString(String str) {
+            return str.split(",");
+        }
+
+        private static int[] convertStringToInt(String[] strings) {
+            int[] integers = new int[strings.length];
+            for (int i = 0; i < integers.length; i++) {
+                integers[i] = Integer.parseInt(strings[i]);
+            }
+            return integers;
+        }
+
+        private static void printEvenNumber(int[] numbers) {
+            for (int number : numbers) {
+                if (number % 2 == 0) {
+                    System.out.println(number);
+                }
+            }
+        }
+
+        public static void main(String[] args) throws IOException {
+            Task13.start();
+        }
+    }
+    //    ============task2.04===============
+//        4) Реализуйте метод, который находит минимум из 4-ёх чисел (для этого он должен использовать
+//          другой метод, написанный вами, который находит минимум из двух чисел)
+
+    public static class Task14 {
+        public static int findMinOfFourNumber(int n1, int n2, int n3, int n4) {
+            int min1 = findMin(n1, n2);
+            int min2 = findMin(n3, n4);
+            return min1 < min2 ? min1 : min2;
+        }
+
+        private static int findMin(int n1, int n2) {
+            return n1 < n2 ? n1 : n2;
+        }
+
+        public static void main(String[] args) {
+            System.out.println(findMinOfFourNumber(22, 6, 22211, 7));
+        }
+    }
+
 
 }
