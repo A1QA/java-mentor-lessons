@@ -252,6 +252,31 @@ public class App {
     //3) Прочитайте из консоли BuffereReader’ом массив чисел переданных через запятую в одну строку.
     // Из этого массива выведете только чётный.
 
+    public static class Task1301{
+        public static void printEvenNumber() throws IOException {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String[] strings = br.readLine().split(",");
+            int[] numbers = convertStringToIntArr(strings);
+            for (int number : numbers) {
+                if (number % 2 == 0) {
+                    System.out.println(number);
+                }
+            }
+        }
+
+        private static int[] convertStringToIntArr(String[] strings) {
+            int[] integers = new int[strings.length];
+            for (int i = 0; i < integers.length; i++) {
+                integers[i] = Integer.parseInt(strings[i]);
+            }
+            return integers;
+        }
+
+        public static void main(String[] args) throws IOException {
+            Task1301.printEvenNumber();
+        }
+    }
+
     public static class Task13 {
         public static void start() throws IOException {
             int[] integers = convertStringToInt(parseString(readFromConsole()));
